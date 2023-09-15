@@ -1,0 +1,78 @@
+{ 
+    "users": [
+        {
+            "id": 1,
+            "name": "saveen",
+            "password": "saveen123",
+            "username": "sam",
+            "email": "saveen@gmail.com"
+    
+        },
+        {
+            "id": 2,
+            "name": "yati",
+            "password": "yati123",
+            "username": "yati420",
+            "email": "yati@yahoo.com"
+        },
+        {
+            "id": 3,
+            "name": "yash",
+            "password": "yash123",
+            "username": "yash_12",
+            "email": "yash@outlook.com"
+        },
+        {
+            "id": 4,
+            "name": "nitin",
+            "password": "nitin123",
+            "username": "nit_34",
+            "email": "nitin@gmail.com"
+        },
+        {
+            "id": 5,
+            "name": "rahul",
+            "password": "rahul123",
+            "username": "rahul798465",
+            "email": "rahul@outlook.com"
+        },
+        {
+            "id": 6,
+            "name": "divya",
+            "password": "divya123",
+            "username": "divu",
+            "email": "divya@yahoo.com"
+        },
+        {
+            "id": 7,
+            "name": "pooja",
+            "password": "pooja123",
+            "username": "pooja_56",
+            "email": "pooja@gmail.com"
+        },
+        {
+            "id": 8,
+            "name": "arjun",
+            "password": "arjun123",
+            "username": "arzzzun",
+            "email": "arjun@outlook.com"
+        },
+        {
+            "id": 9,
+            "name": "sweta",
+            "password": "sweta123",
+            "username": "sweta6786",
+            "email": "sweta@yahoo.com"
+        },
+        {
+            "id": 10,
+            "name": "pawan",
+            "password": "pawan123",
+            "username": "pawan394",
+            "email": "pawan@gmail.com"
+        }
+
+    ]
+    
+
+}

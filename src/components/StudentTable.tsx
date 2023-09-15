@@ -1,7 +1,7 @@
 // import React from 'react'
 import Table from 'react-bootstrap/Table';
 import { useEffect } from "react";
-import users from '../users';
+import { users } from '../users';
 
 const StudentTable = ({setCurrentLinks, name}) => {
 
@@ -25,7 +25,7 @@ let currentUser;
     const capitalName: string = name.toUpperCase();
 
   return (
-    <div className='mx-20 flex place-content-center bg-green-300 rounded-xl py-10'>
+    <div className='mx-20 flex place-content-center ml-32 bg-green-300 rounded-xl pt-32 py-10'>
       <Table striped bordered hover>
       <thead>
         <tr className='bg-pink-300'>

@@ -2,14 +2,14 @@
 import { useEffect } from "react";
 import Login from "../components/Login"
 
-const LoginPage = ({setCurrentUser}) => {
+const LoginPage = ({setCurrentLinks, setCurrentUser}) => {
 
     useEffect(() => {
         setCurrentUser("guest");
     })
 
   return (
-    <Login />
+    <Login setCurrentLinks={setCurrentLinks} />
   )
 }
 
