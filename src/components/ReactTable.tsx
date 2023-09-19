@@ -165,7 +165,7 @@ const ReactTable = ({setCurrentLinks, currentUser, list, actionModal, columns, e
     // render(){
 
 
-    const [selectedRows, setSelectedRows] = useState<any>(null);
+    const [selectedRows, setSelectedRows] = useState<any>([]);
     // const [toggleCleared, setToggleCleared] = useState(false);
     const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
     const [data, setData] = useState(list);
