@@ -1,17 +1,10 @@
 {
   "users": [
     {
-      "id": 7,
-      "name": "pooja",
-      "password": "pooja123",
-      "username": "pooja_56123",
-      "email": "pooja@gmail.com"
-    },
-    {
       "id": 9,
       "name": "sweta",
       "password": "sweta123",
-      "username": "sweta6786",
+      "username": "sweta6786123",
       "email": "sweta@yahoo.com"
     },
     {
