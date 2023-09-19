@@ -3,8 +3,9 @@
 
 // import { useState } from "react";
 import { Link } from "react-router-dom";
+import { SideBar2Type } from "../Types/componentsTypes";
 
-const Sidebar = ({links}) => {
+const Sidebar = ({links}: SideBar2Type): JSX.Element => {
 
     // const links = [
     //     {label: "Home", path: "/"},

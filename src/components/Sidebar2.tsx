@@ -3,9 +3,10 @@ import { Nav } from "react-bootstrap";
 // import { withRouter } from "react-router";
 import '../css/Dashboard.css';
 import { Link } from "react-router-dom";
+import { SideBar2Type } from "../Types/componentsTypes";
 
 
-const Sidebar2 = ({links}) => {
+const Sidebar2 = ({links}: SideBar2Type): JSX.Element => {
 
 
     const renderedItems = links.map((link) => {
@@ -24,7 +25,7 @@ const Sidebar2 = ({links}) => {
   return (
     <div>
     
-            <Nav className="col-md-12 d-none d-md-block mt-14 bg-slate-300 sidebar bg-slate-200 w-1/12"
+            <Nav className="col-md-12 d-none d-md-block mt-14 bg-slate-300 sidebar w-1/12"
             // activeKey="/home"
             // onSelect={selectedKey => alert(`selected ${selectedKey}`)}
             >

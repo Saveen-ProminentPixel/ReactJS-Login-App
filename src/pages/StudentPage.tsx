@@ -1,22 +1,23 @@
 // import React from 'react'
 // import users from '../users'
 
-import { useParams } from "react-router-dom";
+import { Params, useParams } from "react-router-dom";
 import Student from "../components/Student";
 import { useEffect } from "react";
+import { StudentPageType } from "../Types/pagesProps";
 
 
 
-const StudentPage = ({setCurrentLinks, setCurrentUser}) => {
+const StudentPage = ({setCurrentLinks, setCurrentUser}: StudentPageType): JSX.Element => {
 
-    const { name } = useParams();
+    const { name }: Readonly<Params<string>> = useParams();
     
     useEffect(() => {
-        setCurrentUser(name);
+        setCurrentUser(name!);
     }, []);
 
   return (
-    <Student setCurrentLinks={setCurrentLinks} name={name} />
+    <Student setCurrentLinks={setCurrentLinks} name={name!} />
   )
 }
 

@@ -1,21 +1,34 @@
 // import React from 'react'
 
+// import { productListType } from "../App";
+// import { productListType } from "../App";
+// import { employeeListType, productListType, userListType } from "../App";
+// import React from "react";
+import React from "react";
+import { productListType } from "../App";
+import { ProductRDTPageType } from "../Types/pagesProps";
 import ReactTable from "../components/ReactTable";
 
-const ProductRDTPage = ({setCurrentLinks, currentUser, setProductList, productList}) => {
+export interface ExpandedComponentProps {
+    data: productListType;
+  }
+  
 
-    const ExpandedComponent = ({ data }) => <pre>{data.description}</pre>;
+const ProductRDTPage = ({setCurrentLinks, currentUser, productList}: ProductRDTPageType): JSX.Element => {
+
+    const expandedComponent: React.FC<ExpandedComponentProps> = ({ data }) => <pre>{data.description}</pre>;
+    // const ExpandedComponent = () => "";
 
     const columns = [
 
         {
             name: "ID",
-            selector: row => row.id,
+            selector: (row: { id: number; }) => row.id,
             sortable: true,
         },
         {
             name: "Title",
-            selector: row => row.title,
+            selector: (row: { title: string; }) => row.title,
             sortable: true,
         },
         // {
@@ -25,22 +38,22 @@ const ProductRDTPage = ({setCurrentLinks, currentUser, setProductList, productLi
         // },
         {
             name: "Price",
-            selector: row => row.price,
+            selector: (row: { price: number; }) => row.price,
             sortable: true,
         },
         {
             name: "Rating",
-            selector: row => row.rating,
+            selector: (row: { rating: number; }) => row.rating,
             sortable: true,
         },
         {
             name: "Brand",
-            selector: row => row.brand,
+            selector: (row: { brand: string; }) => row.brand,
             sortable: true,
         },
         {
             name: "Category",
-            selector: row => row.category,
+            selector: (row: { category: string; }) => row.category,
             sortable: true,
         },
         // {
@@ -50,7 +63,7 @@ const ProductRDTPage = ({setCurrentLinks, currentUser, setProductList, productLi
         // },
         {
             name: "Image",
-            cell: (row) => <img src={row.thumbnail} alt="thumbnail" width="60" height="60" />
+            cell: (row: { thumbnail: string | undefined; }) => <img src={row.thumbnail} alt="thumbnail" width="60" height="60" />
         },
 
     ];
@@ -58,6 +71,7 @@ const ProductRDTPage = ({setCurrentLinks, currentUser, setProductList, productLi
 
     const actionModal = (
         <div>
+            ....
         </div>
       );
 
@@ -68,9 +82,10 @@ const ProductRDTPage = ({setCurrentLinks, currentUser, setProductList, productLi
     //     </> 
     // );
 
+    const dataApi: string = "products";
 
   return (
-    <ReactTable setCurrentLinks={setCurrentLinks} currentUser={currentUser} setList={setProductList} list={productList} actionModal={actionModal} columns={columns} ExpandedComponent={ExpandedComponent} />
+    <ReactTable setCurrentLinks={setCurrentLinks} currentUser={currentUser} list={productList} actionModal={actionModal} columns={columns} expandedComponent={expandedComponent} isExpandable={true} isSelectable={false} dataApi={dataApi} />
   )
 }
 

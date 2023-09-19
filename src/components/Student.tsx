@@ -1,8 +1,9 @@
 // import React from 'react'
+import { StudentType } from "../Types/componentsTypes";
 import { users } from "../users";
 import { useEffect } from "react";
 
-const Student = ({setCurrentLinks, name}) => {
+const Student = ({setCurrentLinks, name}: StudentType): JSX.Element => {
 
     // const currentUser = users.reduce(user => {
     //     if(user.name === name){

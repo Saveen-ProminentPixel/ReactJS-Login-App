@@ -1,50 +1,70 @@
 // import React from 'react'
 
+import { EmployeeRDTPageType } from "../Types/pagesProps";
 import ReactTable from "../components/ReactTable";
+// import { reducer } from '../App.tsx'
 
-const EmpoyeeRDTPage = ({setCurrentLinks, currentUser, setEmployeeList, employeeList}) => {
+const EmpoyeeRDTPage = ({setCurrentLinks, currentUser, employeeList}: EmployeeRDTPageType): JSX.Element => {
+// const EmpoyeeRDTPage = ({reducer}) => {
 
+    // const employeeAction = {
+    // type: "employee",
+    // payload: {
+    //   data: userDb.employees,
+    // }
+//   }
+
+// const newSetCurrentLinks = setCurrentLinks;
 
     const columns = [
 
         {
             name: "ID",
-            selector: row => row.id,
+            selector: (row: { id: number; }) => row.id,
             sortable: true,
         },
         {
             name: "FirstName",
-            selector: row => row.firstName,
+            selector: (row: { firstName: string; }) => row.firstName,
             sortable: true,
         },
         {
             name: "LastName",
-            selector: row => row.lastName,
+            selector: (row: { lastName: string; }) => row.lastName,
             sortable: true,
         },
         {
             name: "Company",
-            selector: row => row.company.name,
+            selector: (row: { company: { name: string; }; }) => row.company.name,
             sortable: true,
         },
         {
             name: "Title",
-            selector: row => row.company.title,
+            selector: (row: { company: { title: string; }; }) => row.company.title,
             sortable: true,
         },
         {
             name: "Department",
-            selector: row => row.company.department,
+            selector: (row: { company: { department: string; }; }) => row.company.department,
             sortable: true,
         },
         
 
     ]
 
+    const actionModal = (
+        <div>
+            ...
+        </div>
+    );
 
+    // const ExpandedComponent = "";
+
+    const dataApi: string = "employees";
 
   return (
-    <ReactTable setCurrentLinks={setCurrentLinks} currentUser={currentUser} setList={setEmployeeList} list={employeeList} columns={columns} isSelectable={true} />
+    <ReactTable setCurrentLinks={setCurrentLinks} currentUser={currentUser} list={employeeList} actionModal={actionModal} columns={columns} isExpandable={false} isSelectable={true} dataApi={dataApi} />
+    // <ReactTable columns={columns} isSelectable={true} {...state, dispatch} />
   )
 }
 

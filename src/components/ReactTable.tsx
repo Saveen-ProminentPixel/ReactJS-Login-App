@@ -1,7 +1,13 @@
 // import React from 'react'
-import React, { PureComponent, useMemo, useState, useCallback, useEffect, Fragment } from 'react';
-import DataTable, { Alignment, Direction, createTheme } from "react-data-table-component";
+import {useState, useEffect, Fragment } from 'react';
+import DataTable, { Alignment, Direction, TableColumn, createTheme } from "react-data-table-component";
 import DeleteModal from './DeleteModal';
+import { ReactTableType } from '../Types/componentsTypes';
+import { ExpandableRowsComponent } from 'react-data-table-component/dist/src/DataTable/types';
+import axios from 'axios';
+import { employeeListType, productListType, userListType } from '../App';
+// import ToggleHook from '../hooks/toggleHook';
+// import { reducer } from '../App';
 // import differenceBy from 'lodash/differenceBy';
 // import { useEffect } from "react";
 // import usersDb from "../../db.json";
@@ -15,16 +21,33 @@ import DeleteModal from './DeleteModal';
 // const ExpandedComponent = ({ data }) => <pre>{JSON.stringify(usersData.users, null, 2)}</pre>;
 
 
-const ReactTable = ({setCurrentLinks, currentUser, setList, list, actionModal, columns, ExpandedComponent, isSelectable}) => {
+const ReactTable = ({setCurrentLinks, currentUser, list, actionModal, columns, expandedComponent, isSelectable, isExpandable, dataApi, toggle, toggleFunction}: ReactTableType): JSX.Element => {
+
+      
+      // const {toggle, toggleFunction} = ToggleHook();
+
+// const ReactTable = ({columns, isSelectable}, {...state}, dispatch) => {
+  
+  // const dummyExpandedcomponent = ExpandedComponent;
 
     const links = [
         {label: "Home", path: "/"},
         {label: "Back", path: `/user/${currentUser}`},
     ];
 
+
+    // const employeeAction = {
+    //   type: "employeeLink",
+    //   payload: {
+    //     currentLinks: links,
+    //   }
+    // }
     useEffect(() => {
-        setCurrentLinks(links);
+      setCurrentLinks(links);
     }, []);
+    
+
+    // dispatch(employeeAction)
 
     // const [showModal, setShowModal] = useState(false);
     // const [showAddModal, setShowAddModal] = useState(false);
@@ -142,18 +165,62 @@ const ReactTable = ({setCurrentLinks, currentUser, setList, list, actionModal, c
     // render(){
 
 
-    const [selectedRows, setSelectedRows] = useState([]);
-	const [toggleCleared, setToggleCleared] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-	// const [data, setData] = React.useState(tableDataItems);
+    const [selectedRows, setSelectedRows] = useState<any>(null);
+    // const [toggleCleared, setToggleCleared] = useState(false);
+    const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
+    const [data, setData] = useState(list);
+    const [loading, setLoading] = useState(false);
+    const [totalRows, setTotalRows] = useState(0);
+    const [perPage, setPerPage] = useState(10);
 
-    const handleRowSelected = React.useCallback(state => {
-		setSelectedRows(state.selectedRows);
-        console.log(selectedRows);
-        dummyDeleteModal();
-	}, []);
+    useEffect(() => {
+      setTotalRows(list.length);
+    },[])
+    
 
-    // const contextActions = React.useMemo(() => {
+    const fetchUsers = async(page: number) => {
+      setLoading(true);
+      console.log(totalRows);
+      const response = await axios.get(`http://localhost:3002/${dataApi}?_page=${page}&_limit=${perPage}`);
+      console.log(response.data);
+      const data: userListType[] | employeeListType[] | productListType[] = response.data;
+      setData(data);
+      // setTotalRows(list.length);
+      setLoading(false);
+    }
+    // console.log(totalRows);
+    
+    const handlePageChange = (page: number) => {
+      fetchUsers(page);
+    };
+    
+    const handlePerRowsChange = async(newPerPage: number, page: number) => {
+      setLoading(true);
+      const response = await axios.get(`http://localhost:3002/${dataApi}?_page=${page}&_limit=${newPerPage}`);
+      console.log(response.data);
+      const data: userListType[] | employeeListType[] | productListType[] = response.data;
+      setData(data);
+      setPerPage(perPage);
+      setLoading(false);
+    }
+
+    useEffect(() => {
+      fetchUsers(1);
+    },[toggle])
+
+
+    const handleRowSelected = (state: any): void => {
+      console.log(selectedRows);
+      setSelectedRows(state.selectedRows);
+      console.log(selectedRows); 
+    };
+
+    useEffect(() => {
+      dummyDeleteModal();
+
+    }, [selectedRows]);
+    
+  //   const contextActions = React.useMemo(() => {
 	// 	const handleDelete = () => {
 			
 	// 		if (window.confirm(`Are you sure you want to delete:\r ${selectedRows.map(r => r.id)}?`)) {
@@ -172,14 +239,16 @@ const ReactTable = ({setCurrentLinks, currentUser, setList, list, actionModal, c
 
     const dummyDeleteModal = () => {
         // if(selectedRows){
+          // console.log(selectedRows);
             setShowDeleteModal(true);
         // }
-        if(!selectedRows){
+        if(selectedRows.length === 0){
             setShowDeleteModal(false);
         }
     }
 
-    const deleteModal = <DeleteModal />;
+    const deleteModal = <DeleteModal selectedRows={selectedRows} list={list} dataApi={dataApi} setShowDeleteModal={setShowDeleteModal} toggleFunction={toggleFunction} />;
+    // const deleteModal = <DeleteModal selectedRows={selectedRows} {...state} {...dispatch} />;
 
 
 
@@ -187,23 +256,28 @@ const ReactTable = ({setCurrentLinks, currentUser, setList, list, actionModal, c
         <Fragment>
         {showDeleteModal && deleteModal}
         <DataTable className="ml-32 pt-20"
-        columns={columns}
-        data={list} 
+        columns={columns as TableColumn<unknown>[]}
+        data={data} 
         selectableRows = {isSelectable}
         // contextActions={contextActions}
         onSelectedRowsChange={handleRowSelected}
-		clearSelectedRows={toggleCleared}
-        expandableRows
-        expandableRowsComponent={ExpandedComponent}
+        // clearSelectedRows={toggleCleared}
+        expandableRows = {isExpandable}
+        expandableRowsComponent={expandedComponent as ExpandableRowsComponent<unknown> | undefined}
+        progressPending={loading}
         pagination
-        fixedHeader
+        // fixedHeader
         // conditionalRowStyles={conditionalRowStyles}
         // customStyles={customStyles}
         // theme="dark"
+        paginationServer
+        paginationTotalRows={list.length}
+        onChangeRowsPerPage={handlePerRowsChange}
+        onChangePage={handlePageChange}
         subHeaderAlign={Alignment.CENTER}
         direction={Direction.LTR}
         />
-        {/* {actionModal} */}
+        {actionModal}
         
         {/* {showModal && modal}
         {showAddModal && addModal} */}

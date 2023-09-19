@@ -1,7 +1,9 @@
 // import React from 'react'
 // import { useState } from "react"; 
 
-const Navbar = ({currentUser}) => {
+import { NavbarType } from "../Types/componentsTypes"
+
+const Navbar = ({currentUser}: NavbarType): JSX.Element => {
 
   return (
     <div className='grid overflow-hidden grid-cols-2 justify-items-end bg-slate-400 mx-10 py-4 border-2 border-black fixed'>

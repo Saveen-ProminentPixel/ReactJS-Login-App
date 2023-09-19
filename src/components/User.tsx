@@ -1,8 +1,9 @@
 // import React from 'react'
 
 import { useEffect } from "react";
+import { UserType } from "../Types/componentsTypes";
 
-const User = ({setCurrentLinks, name}) => {
+const User = ({setCurrentLinks, name}: UserType): JSX.Element => {
 
     const links = [
         {label: "Home", path: "/"},

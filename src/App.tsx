@@ -6,18 +6,20 @@ import Header from "./components/Header";
 // import Sidebar from "./components/Sidebar";
 // import Navbar from "./components/Navbar";
 import UserPage from "./pages/UserPage";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import StudentPage from "./pages/StudentPage";
 import TablePage from "./pages/TablePage";
 import Sidebar2 from "./components/Sidebar2";
 import AllStudentPage from "./pages/AllStudentPage";
-import {users} from "./users";
-import userData from "./userData.json"
+// import {users} from "./users";
+// import userData from "./userData.json"
 import userDb from "../db.json";
-import ReactTable from "./components/ReactTable";
+// import ReactTable from "./components/ReactTable";
 import UserRDTPage from "./pages/UserRDTPage";
 import ProductRDTPage from "./pages/ProductRDTPage";
 import EmpoyeeRDTPage from "./pages/EmpoyeeRDTPage";
+import axios from "axios";
+// import ToggleHook from "./hooks/toggleHook";
 
 
 // interface LinkModal{
@@ -25,22 +27,122 @@ import EmpoyeeRDTPage from "./pages/EmpoyeeRDTPage";
 //     password: string,
 // }
 
+export type userListType = {
+    id: number
+    name: string;
+    password: string;
+    username: string;
+    email: string;
+};
 
-function App() {
+export type productListType = {
+    id: number;
+    title: string;
+    description: string;
+    price: number;
+    discountPercentage: number;
+    rating: number;
+    stock: number;
+    brand: string;
+    category: string;
+    thumbnail: string;
+    images: string[];
+};
 
-  const links: {label: string; path: string;}[] = [{label: "Home", path: "/"},];
-  const user: string = "guest";
+export type employeeListType = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  company: { name: string; title: string; department: string; };
+};  
+
+
+
+const links: {label: string; path: string;}[] = [{label: "Home", path: "/"},];
+const user: string = "guest";
+
+// const initialState = {
+//   currentLinks: links,
+//   currentUser: user,
+//   userList: userDb.users,
+//   userListOfRDT: userDb.users,
+//   productListOfRDT: userDb.products,
+//   employeeListOfRDT: userDb.employees
+// };
+
+
+
+// export const reducer = (state, action) => {
+//   if(action.type === "employeeLink"){
+//    return {
+//     ...state, currentLinks : action.payload.currentLinks,
+//    }
+//   }
+//  }
+
+
+function App(): JSX.Element {
+
+  // useEffect(() => {
+  //   const fetchData = async() => {
+  //     return await axios.get("http://localhost:3002/employees");
+  //     // return res.data;
+  //   }
+  //   console.log(fetchData());
+  // }, []);
+
+  // const [toggle, toggleFunction] = ToggleHook();
+  
 
   const [currentLinks, setCurrentLinks] = useState(links);
   const [currentUser, setCurrentUser] = useState(user);
-  const [userList, setUserList] = useState(userDb.users);
-  const [userListOfRDT, setUserListOfRDT] = useState(userDb.users);
-  const [productListOfRDT, setProductListOfRDT] = useState(userDb.products);
-  const [employeeListOfRDT, setEmployeeListOfRDT] = useState(userDb.employees);
+  // const [userList, setUserList] = useState<userListType[]>(userDb.users);
+  const [userList, setUserList] = useState<userListType[]>([]);
+  const [userListOfRDT, setUserListOfRDT] = useState<userListType[]>([]);
+  const [productListOfRDT, setProductListOfRDT] = useState<productListType[]>(userDb.products);
+  const [employeeListOfRDT, setEmployeeListOfRDT] = useState<employeeListType[]>(userDb.employees);
+
+  useEffect(() => {
+
+    (async() => {
+      const data = await axios.get("http://localhost:3002/users");
+      const response: userListType[] = data.data;
+      setUserList(response);
+      setUserListOfRDT(response);
+    }) ();
+
+    (async() => {
+      const data = await axios.get("http://localhost:3002/employees");
+      const response: employeeListType[] = data.data;
+      setEmployeeListOfRDT(response);
+    }) ();
+
+    (async() => {
+      const data = await axios.get("http://localhost:3002/products");
+      const response: productListType[] = data.data;
+      setProductListOfRDT(response);
+    }) ();
+  },[])
+
 
   
+  
+  // const [state, dispatch] = useReducer(reducer, initialState);
 
-  console.log(userListOfRDT);
+
+  // console.log(userListOfRDT);
+
+  // const employeeAction = {
+  //   type: "employee",
+  //   payload: {
+  //     data: userDb.employees,
+  //   }
+  // }
+
+  // dispatch(employeeAction)
+
+
+  
 
   return (
     <div>
@@ -64,9 +166,10 @@ function App() {
             <Route path="user/student/:name" element={<StudentPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
             <Route path="user/studenttable/:name" element={<TablePage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
             <Route path="user/allstudent/" element={<AllStudentPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} setUserList={setUserList} userList={userList} />} />
-            <Route path="user/reacttable/" element={<UserRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} setUserList={setUserListOfRDT} userList={userListOfRDT} />} />
-            <Route path="product/reacttable/" element={<ProductRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} setProductList={setProductListOfRDT} productList={productListOfRDT} />} />
-            <Route path="employee/reacttable/" element={<EmpoyeeRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} setEmployeeList={setEmployeeListOfRDT} employeeList={employeeListOfRDT} />} />
+            <Route path="user/reacttable/" element={<UserRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} userList={userListOfRDT} />} />
+            <Route path="product/reacttable/" element={<ProductRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} productList={productListOfRDT} />} />
+            <Route path="employee/reacttable/" element={<EmpoyeeRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} employeeList={employeeListOfRDT} />} />
+            {/* <Route path="employee/reacttable/" element={<EmpoyeeRDTPage reducer={reducer}  />} /> */}
           </Routes>
         
       </div>
@@ -76,3 +179,5 @@ function App() {
 }
 
 export default App;
+
+

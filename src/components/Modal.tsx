@@ -1,6 +1,8 @@
 // import React from 'react'
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { ModalType } from "../Types/componentsTypes";
+import axios from "axios";
 // import { users } from "../users";
 // import userData from '../userData.json'
 // import userDb from '../../db.json';
@@ -8,10 +10,10 @@ import * as Yup from "yup";
 
 // import { Modal } from "react-bootstrap";
 
-const Modal = ({onClose, actionBar, name, setUserList, userList}) => {
+const Modal = ({onClose, actionBar, name, userList, toggleFunction}: ModalType): JSX.Element => {
 
 
-    const currentEditUser = userList.find(user => user.name === name);
+    const currentEditUser = userList.find(user => user.name === name)!;
 
     // const editUserByName = async (id, name, password, username, email) => {
     //     const response = await axios.put(`http://localhost:3002/users/${id}`, {
@@ -34,20 +36,32 @@ const Modal = ({onClose, actionBar, name, setUserList, userList}) => {
     // setUserList(updatedUsers);
     // }
 
-    function changeUserData(newPassword, newUsername, newEmail) {
+    function changeUserData(newPassword: string, newUsername: string, newEmail: string): void {
 
         // let id = 0;
-        const newUsers = userList.map(user => {
-            if(user.name === name){
-                return {...user, username: newUsername, password: newPassword, email: newEmail};
-            }
-            return user;
-        })
+        // const newUsers = userList.map(user => {
+        //     if(user.name === name){
+        //         return {...user, username: newUsername, password: newPassword, email: newEmail};
+        //     }
+        //     return user;
+        // })
 
         // editUserByName(id, name, newPassword, newUsername, newEmail);
 
         // userDb.users = newUsers;
-        setUserList(newUsers);
+        // setUserList(newUsers);
+
+        // const user = userList.find(user => user.name === name);
+        (async() => {
+            await axios.put(`http://localhost:3002/users/${currentEditUser.id}`, {
+                ...currentEditUser,
+                username: newUsername,
+                password: newPassword,
+                email: newEmail
+            })
+        }) ();
+
+        toggleFunction!();
 
         // const updatedData = jsonData.map(item => {
         //     if (item.id === someIdToMatch) {

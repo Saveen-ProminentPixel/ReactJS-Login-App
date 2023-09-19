@@ -4,37 +4,46 @@ import { useEffect, useState } from "react";
 // import users from '../users';
 import Modal from './Modal';
 import AddModal from './AddModal';
+import { AllStudentType } from '../Types/componentsTypes';
+import { userListType } from '../App';
 
-const AllStudent = ({setCurrentLinks, currentUser, setUserList, userList}) => {
+type userType = {
+  name: string;
+  password: string;
+  username: string;
+  email: string;
+};
+
+const AllStudent = ({setCurrentLinks, currentUser, setUserList, userList}: AllStudentType): JSX.Element => {
 
     const [showModal, setShowModal] = useState(false);
     const [showAddModal, setShowAddModal] = useState(false);
     const [editUser, setEditUser] = useState(currentUser);
 
-    const handleEditClick = (user) => {
+    const handleEditClick = (user: userType): void => {
         setEditUser(user.name);
         setShowModal(true);
     }
     
-    const handleClose = () => {
+    const handleClose = (): void => {
         setShowModal(false);
     }
 
-    const handleAddClose = () => {
+    const handleAddClose = (): void => {
       setShowAddModal(false);
     }
 
-    const handleDeleteClick = (user) => {
+    const handleDeleteClick = (user: userType): void => {
       // setEditUser(user.name);
       // setShowModal(true);
       console.log(userList);
       console.log(user);
 
-      const newUserList = userList.filter(current => current.name !== user.name);
+      const newUserList: userListType[] = userList.filter(current => current.name !== user.name);
       setUserList(newUserList);
   }
 
-    const handleAddClick = () => {
+    const handleAddClick = (): void => {
       setShowAddModal(true);
   }
 
@@ -49,7 +58,7 @@ const AllStudent = ({setCurrentLinks, currentUser, setUserList, userList}) => {
       </div>
   );
 
-    const modal = <Modal onClose={handleClose} actionBar={actionBar} name={editUser} setUserList={setUserList} userList={userList} ></Modal>
+    const modal = <Modal onClose={handleClose} actionBar={actionBar} name={editUser} userList={userList} ></Modal>
     const addModal = <AddModal onClose={handleAddClose} actionBar={actionAddBar} setUserList={setUserList} userList={userList} ></AddModal>
 
     const links = [

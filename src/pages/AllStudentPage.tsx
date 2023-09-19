@@ -1,9 +1,17 @@
 // import React from 'react'
-
+// import { userListType } from "../App";
+import { AllStudentPageProps } from "../Types/pagesProps";
 import AllStudent from "../components/AllStudent"
 // import StudentPage from "./StudentPage"
 
-const AllStudentPage = ({setCurrentLinks, currentUser, setUserList, userList}) => {
+// interface AllStudentPageProps {
+//   setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
+//   currentUser: string;
+//   setUserList: React.Dispatch<React.SetStateAction<userListType>>;
+//   userList: userListType;
+// }
+
+const AllStudentPage = ({setCurrentLinks, currentUser, setUserList, userList}: AllStudentPageProps): JSX.Element => {
 
 
 
@@ -12,4 +20,4 @@ const AllStudentPage = ({setCurrentLinks, currentUser, setUserList, userList}) =
   )
 }
 
-export default AllStudentPage
+export default AllStudentPage;

@@ -1,16 +1,26 @@
 // import React from 'react'
 import { useState } from "react";
 import ReactTable from "../components/ReactTable"
-import AddModal from "../components/AddModal";
+// import AddModal from "../components/AddModal";
 import Modal from "../components/Modal";
+import { UserRDTPageType } from "../Types/pagesProps";
+import axios from "axios";
+import ToggleHook from "../hooks/toggleHook";
+// import { userListType } from "../App";
+// import ToggleHook from "../hooks/toggleHook";
 
-const UserRDTPage = ({setCurrentLinks, currentUser, setUserList, userList}) => {
+const UserRDTPage = ({setCurrentLinks, currentUser, userList}: UserRDTPageType): JSX.Element => {
+
+  const {toggle, toggleFunction} = ToggleHook();  
 
   const [showModal, setShowModal] = useState(false);
-    const [showAddModal, setShowAddModal] = useState(false);
+    // const [showAddModal, setShowAddModal] = useState(false);
     const [editUser, setEditUser] = useState(currentUser);
+    // const [deleteUser, setDeleteUser] = useState(false);
 
-    const handleEditClick = (name) => {
+    
+
+    const handleEditClick = (name: string) => {
         setEditUser(name);
         setShowModal(true);
     }
@@ -19,39 +29,66 @@ const UserRDTPage = ({setCurrentLinks, currentUser, setUserList, userList}) => {
         setShowModal(false);
     }
 
-    const handleAddClose = () => {
-      setShowAddModal(false);
-    }
+    // const handleAddClose = () => {
+    //   setShowAddModal(false);
+    // }
 
-    const handleDeleteClick = (name) => {
+    const handleDeleteClick = (name: string) => {
       // setEditUser(user.name);
       // setShowModal(true);
       console.log(userList);
       console.log(name);
-      const newUserList = userList.filter(current => current.name !== name);
-      setUserList(newUserList);
+      // const newUserList = userList.filter(current => current.name !== name);
+      // setUserList(newUserList);
+      
+      const user = userList.find(user => user.name === name);
+      (async() => {
+        await axios.delete(`http://localhost:3002/users/${user!.id}`);
+      }) ();
+
+      toggleFunction();
+      // setDeleteUser(!deleteUser);
+      // toggleFunction();
+      // setShowModal(showModal);
+      // (async() => {
+      //   const data = await axios.get("http://localhost:3002/users");
+      //   const response: userListType[] = data.data;
+      //   setUserList(response);
+      //   // userList = response;
+      // }) ();
   }
 
-    const handleAddClick = () => {
-      setShowAddModal(true);
-    }
+  // useEffect(() => {
+  //   (async() => {
+  //     const data = await axios.get("http://localhost:3002/users");
+  //     const response: userListType[] = data.data;
+  //     setUserList(response);
+  //     // userList = response;
+  //   }) ();
+  // },[toggle])
+
+    // const handleAddClick = () => {
+    //   setShowAddModal(true);
+    // }
 
     const actionBar = (
         <div>
-            <button className='rounded bg-red-500 px-10 py-2' onClick={handleClose}>Cancel</button>
+            {/* <button className='rounded bg-red-500 px-10 py-2' onClick={handleClose}>Cancel</button> */}
+            <button onClick={handleClose}>Cancel</button>
         </div>
     );
-    const actionAddBar = (
-      <div>
-          <button className='rounded bg-red-500 px-10 py-2' onClick={handleAddClose}>Cancel</button>
-      </div>
-  );
+  //   const actionAddBar = (
+  //     <div>
+  //         {/* <button className='rounded bg-red-500 px-10 py-2' onClick={handleAddClose}>Cancel</button> */}
+  //         <button onClick={handleAddClose}>Cancel</button>
+  //     </div>
+  // );
 
 
-    const links = [
-        {label: "Home", path: "/"},
-        {label: "Back", path: `/user/${currentUser}`},
-    ];
+    // const links = [
+    //     {label: "Home", path: "/"},
+    //     {label: "Back", path: `/user/${currentUser}`},
+    // ];
 
     // const handleButtonClick = (name) => {
     //     // console.log("Clicked");
@@ -65,15 +102,15 @@ const UserRDTPage = ({setCurrentLinks, currentUser, setUserList, userList}) => {
     //     setSelectedRows(state.selectableRows);
     // }, []);
 
-    const modal = <Modal onClose={handleClose} actionBar={actionBar} name={editUser} setUserList={setUserList} userList={userList} ></Modal>
-    const addModal = <AddModal onClose={handleAddClose} actionBar={actionAddBar} setUserList={setUserList} userList={userList} ></AddModal>
+    const modal = <Modal onClose={handleClose} actionBar={actionBar} name={editUser} userList={userList} toggleFunction={toggleFunction} ></Modal>
+    // const addModal = <AddModal onClose={handleAddClose} actionBar={actionAddBar} setUserList={setUserList} userList={userList} ></AddModal>
 
   const columns = 
     // useMemo(() =>  
     [
         {
-            cell: (row) => <div className="dropdown">
-            <button className="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            cell: (row: { name: string; }) => <div className="dropdown">
+            <button className="btn btn-secondary dropdown-toggle bg-slate-400" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Dropdown button
             </button>
             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -94,22 +131,22 @@ const UserRDTPage = ({setCurrentLinks, currentUser, setUserList, userList}) => {
         // },
         {
             name: "Name",
-            selector: row => row.name,
+            selector: (row: { name: string; }) => row.name,
             sortable: true,
         },
         {
             name: "Password",
-            selector: row => row.password,
+            selector: (row: { password: string; }) => row.password,
             sortable: true,
         },
         {
             name: "UserName",
-            selector: row => row.username,
+            selector: (row: { username: string; }) => row.username,
             sortable: true,
         },
         {
             name: "Email",
-            selector: row => row.email,
+            selector: (row: { email: string; }) => row.email,
             sortable: true,
         }
     ];
@@ -118,14 +155,14 @@ const UserRDTPage = ({setCurrentLinks, currentUser, setUserList, userList}) => {
     const actionModal = (
       <div>
         {showModal && modal}
-        {showAddModal && addModal}
+        {/* {showAddModal && addModal} */}
       </div>
     );
 
-
+      const dataApi: string = "users";
 
   return (
-    <ReactTable setCurrentLinks={setCurrentLinks} currentUser={currentUser} setList={setUserList} list={userList} actionModal={actionModal} columns={columns} />
+    <ReactTable setCurrentLinks={setCurrentLinks} currentUser={currentUser} list={userList} actionModal={actionModal} columns={columns} isExpandable={false} isSelectable={true} dataApi={dataApi} toggle={toggle} toggleFunction={toggleFunction} />
   )
 }
 

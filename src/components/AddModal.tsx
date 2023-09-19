@@ -1,6 +1,8 @@
 // import React from 'react'
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+import { AddModalType } from "../Types/componentsTypes";
+import { userListType } from "../App";
 // import { users } from "../users";
 // import userData from '../userData.json'
 // import userDb from '../../db.json';
@@ -8,9 +10,9 @@ import * as Yup from "yup";
 
 // import { Modal } from "react-bootstrap";
 
-const AddModal = ({onClose, actionBar, setUserList, userList}) => {
+const AddModal = ({onClose, actionBar, setUserList, userList}: AddModalType): JSX.Element => {
 
-    function changeUserData(name, password, username, email) {
+    function changeUserData(name: string, password: string, username: string, email: string) {
 
         // let id = 0;
         // const newUsers = userDb.users.map(user => {
@@ -19,7 +21,8 @@ const AddModal = ({onClose, actionBar, setUserList, userList}) => {
         //     }
         //     return user;
         // })
-        const newUser = {
+        const newUser: userListType = {
+            id: 100,
             name: name,
             password: password,
             username: username,

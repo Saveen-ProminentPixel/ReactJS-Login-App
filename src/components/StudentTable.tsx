@@ -2,8 +2,9 @@
 import Table from 'react-bootstrap/Table';
 import { useEffect } from "react";
 import { users } from '../users';
+import { StudentTableType } from '../Types/componentsTypes';
 
-const StudentTable = ({setCurrentLinks, name}) => {
+const StudentTable = ({setCurrentLinks, name}: StudentTableType): JSX.Element => {
 
   const links = [
     {label: "Home", path: "/"},

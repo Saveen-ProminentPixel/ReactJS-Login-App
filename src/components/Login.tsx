@@ -4,13 +4,14 @@ import * as Yup from "yup";
 import { users } from "../users";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { LoginType } from "../Types/componentsTypes";
 
 interface FormModal{
     name: string,
     password: string
 }
 
-function Login({setCurrentLinks}) {
+function Login({setCurrentLinks}: LoginType): JSX.Element {
 
     const links = [
         {label: "Home", path: "/"},
