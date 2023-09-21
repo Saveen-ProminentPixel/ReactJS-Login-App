@@ -255,7 +255,7 @@ const ReactTable = ({setCurrentLinks, currentUser, list, actionModal, columns, e
     return (
         <Fragment>
         {showDeleteModal && deleteModal}
-        <DataTable className="ml-32 pt-20"
+        <DataTable className="ml-40 pt-20"
         columns={columns as TableColumn<unknown>[]}
         data={data} 
         selectableRows = {isSelectable}

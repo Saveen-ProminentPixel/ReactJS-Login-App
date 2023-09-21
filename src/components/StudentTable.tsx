@@ -9,7 +9,7 @@ const StudentTable = ({setCurrentLinks, name}: StudentTableType): JSX.Element =>
   const links = [
     {label: "Home", path: "/"},
     {label: "Back", path: `/user/${name}`},
-];
+  ];
 
 useEffect(() => {
     setCurrentLinks(links);

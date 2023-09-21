@@ -90,7 +90,7 @@ const AddModal = ({onClose, actionBar, setUserList, userList}: AddModalType): JS
                                     <h1 className="bg-blue-300 mx-10 text-center rounded-xl font-bold text-2xl text-blue-800">Add New Student</h1>
                                     <div className="bg-slate-200 mx-10 pb-2 pt-2 rounded-xl ">
                                     <div className=" m-2 text-center">
-                                        <label className="bg-stone-500 rounded pr-28 px-2 text-white">Name:</label>
+                                                
                                     </div>
                                     <div>
                                         <Field name="name" type="text" className="bg-zinc-200 rounded border-2 border-gray-400 mx-2 mb-2" />

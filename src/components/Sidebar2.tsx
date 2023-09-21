@@ -25,7 +25,7 @@ const Sidebar2 = ({links}: SideBar2Type): JSX.Element => {
   return (
     <div>
     
-            <Nav className="col-md-12 d-none d-md-block mt-14 bg-slate-300 sidebar w-1/12"
+            <Nav className="col-md-12 d-none d-md-block mt-14 bg-slate-300 sidebar w-40 pr-2"
             // activeKey="/home"
             // onSelect={selectedKey => alert(`selected ${selectedKey}`)}
             >

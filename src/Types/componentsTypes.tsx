@@ -1,6 +1,6 @@
 // import { TableColumn } from "react-data-table-component";
 // import { TableColumn } from "react-data-table-component";
-import { employeeListType, productListType, userListType } from "../App";
+import { employeeListType, manageRoleListType, productListType, userListType } from "../App";
 // import { ExpandableRowsComponent } from "react-data-table-component/dist/src/DataTable/types";
 // import { Dispatch, SetStateAction } from "react";
 import { ExpandedComponentProps } from "../pages/ProductRDTPage";
@@ -23,7 +23,7 @@ export interface AllStudentType {
 
 export interface DeleteModalType {
     selectedRows: any;
-    list: (userListType | productListType | employeeListType)[];
+    list: (userListType | productListType | employeeListType)[] | manageRoleListType[];
     dataApi: string;
     setShowDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
     toggleFunction: (() => void) | undefined;
@@ -52,7 +52,7 @@ export interface NavbarType {
 export interface ReactTableType {
     setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
     currentUser: string;
-    list: productListType[] | userListType[] | employeeListType[];
+    list: productListType[] | userListType[] | employeeListType[] | manageRoleListType[];
     actionModal?: JSX.Element;
     columns: unknown[];   
     // expandedComponent?: ({data}: {data: productListType | userListType | employeeListType} ) => JSX.Element;

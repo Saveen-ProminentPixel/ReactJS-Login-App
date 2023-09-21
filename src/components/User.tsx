@@ -13,6 +13,7 @@ const User = ({setCurrentLinks, name}: UserType): JSX.Element => {
         {label: "User RDT", path: `/user/reacttable/`},
         {label: "Product RDT", path: `/product/reacttable/`},
         {label: "Employee RDT", path: `/employee/reacttable/`},
+        {label: "Manage Roles", path: `/user/managerole/`},
     ];
 
     useEffect(() => {

@@ -19,6 +19,9 @@ import UserRDTPage from "./pages/UserRDTPage";
 import ProductRDTPage from "./pages/ProductRDTPage";
 import EmpoyeeRDTPage from "./pages/EmpoyeeRDTPage";
 import axios from "axios";
+import ManageRolePage from "./pages/ManageRolePage";
+import { ManageRolePageType } from "./Types/pagesProps";
+import Modal from 'react-bootstrap/Modal'
 // import ToggleHook from "./hooks/toggleHook";
 
 
@@ -55,6 +58,14 @@ export type employeeListType = {
   lastName: string;
   company: { name: string; title: string; department: string; };
 };  
+
+export type manageRoleListType = {
+  id: number;
+  roleName: string;
+  createdAt: string;
+  updatedAt: string;
+  description: string;
+};
 
 
 
@@ -101,6 +112,7 @@ function App(): JSX.Element {
   const [userListOfRDT, setUserListOfRDT] = useState<userListType[]>([]);
   const [productListOfRDT, setProductListOfRDT] = useState<productListType[]>(userDb.products);
   const [employeeListOfRDT, setEmployeeListOfRDT] = useState<employeeListType[]>(userDb.employees);
+  const [manageRoleList, setManageRoleList] = useState<manageRoleListType[]>(userDb.roles);
 
   useEffect(() => {
 
@@ -121,6 +133,12 @@ function App(): JSX.Element {
       const data = await axios.get("http://localhost:3002/products");
       const response: productListType[] = data.data;
       setProductListOfRDT(response);
+    }) ();
+
+    (async() => {
+      const data = await axios.get("http://localhost:3002/roles");
+      const response: manageRoleListType[] = data.data;
+      setManageRoleList(response);
     }) ();
   },[])
 
@@ -170,6 +188,7 @@ function App(): JSX.Element {
             <Route path="product/reacttable/" element={<ProductRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} productList={productListOfRDT} />} />
             <Route path="employee/reacttable/" element={<EmpoyeeRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} employeeList={employeeListOfRDT} />} />
             {/* <Route path="employee/reacttable/" element={<EmpoyeeRDTPage reducer={reducer}  />} /> */}
+            <Route path="user/managerole/" element={<ManageRolePage setCurrentLinks={setCurrentLinks} currentUser={currentUser} manageRoleList={manageRoleList} />} />
           </Routes>
         
       </div>

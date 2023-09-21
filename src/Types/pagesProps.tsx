@@ -1,5 +1,5 @@
 // import { Dispatch, SetStateAction } from "react";
-import { employeeListType, productListType, userListType } from "../App";
+import { employeeListType, manageRoleListType, productListType, userListType } from "../App";
 
 
 
@@ -47,4 +47,10 @@ export interface UserRDTPageType {
     setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
     currentUser: string;
     userList: userListType[];
+}
+
+export interface ManageRolePageType {
+    setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
+    currentUser: string;
+    manageRoleList: manageRoleListType[];
 }

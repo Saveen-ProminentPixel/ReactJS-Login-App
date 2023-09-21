@@ -24,23 +24,22 @@ const DeleteModal = ({selectedRows, list, dataApi, setShowDeleteModal, toggleFun
     // }
 
     
-      for(const row of selectedRows){
-        // const newRow: {id: number} = row;
-        console.log(row.id);
-        console.log("I am delting");
-        (async() => {
-          await axios.delete(`http://localhost:3002/${dataApi}/${row.id}`);
-          // const response: employeeListType[] = data.data;
-          // setEmployeeListOfRDT(response);
-        }) ();
-        console.log("I am delting");
-      }
-      // setList(list);
-      setShowDeleteModal(false);
-      toggleFunction!();
-      
-
-      // const links = [
+    for(const row of selectedRows){
+      // const newRow: {id: number} = row;
+      console.log(row.id);
+      console.log("I am delting");
+      (async() => {
+        await axios.delete(`http://localhost:3002/${dataApi}/${row.id}`);
+        // const response: employeeListType[] = data.data;
+        // setEmployeeListOfRDT(response);
+      }) ();
+      console.log("I am delting");
+    }
+    // setList(list);
+    setShowDeleteModal(false);
+    toggleFunction!();
+    
+    // const links = [
       //   {label: "Home", path: "/"},
       //   {label: "Back", path: `/user/${currentUser}`},
       // ];

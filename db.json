@@ -1,17 +1,10 @@
 {
   "users": [
     {
-      "id": 9,
-      "name": "sweta",
-      "password": "sweta123",
-      "username": "sweta6786123",
-      "email": "sweta@yahoo.com"
-    },
-    {
       "id": 10,
       "name": "pawan",
-      "password": "pawan123",
-      "username": "pawan394",
+      "password": "rfgfdgdgsd",
+      "username": "pawan394edewr",
       "email": "pawan@gmail.com"
     },
     {
@@ -74,7 +67,7 @@
       "id": 19,
       "name": "ghanshyam",
       "password": "gahjkn324",
-      "username": "ghfvbhj5b45",
+      "username": "1234567",
       "email": "gnahjsyam@gmail.com"
     },
     {
@@ -2544,6 +2537,73 @@
       "ein": "51-7727524",
       "ssn": "534-76-0952",
       "userAgent": "Mozilla/5.0 (X11; Linux i686) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.66 Safari/535.11"
+    }
+  ],
+  "roles": [
+    {
+      "id": 1,
+      "roleName": "Admin",
+      "createdAt": "05-09-2023 06:38:31",
+      "updatedAt": "09-12-2023 04:52:21",
+      "description": "Admin"
+    },
+    {
+      "id": 2,
+      "roleName": "Human Resource",
+      "description": "Human Resource",
+      "createdAt": "4-8-2023 16:52:42",
+      "updatedAt": "4-8-2023 16:52:42"
+    }
+  ],
+  "availablePermissions": [
+    {
+      "id": 1,
+      "availableRoles": [
+        "student",
+        "product"
+      ]
+    },
+    {
+      "id": 2,
+      "availableRoles": [
+        "student"
+      ]
+    }
+  ],
+  "assignedPermissions": [
+    {
+      "id": 1,
+      "assignedRoles": [
+        {
+          "name": "employee",
+          "access": {
+            "view": false,
+            "edit": false,
+            "delete": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "assignedRoles": [
+        {
+          "name": "product",
+          "access": {
+            "view": true,
+            "edit": false,
+            "delete": false
+          }
+        },
+        {
+          "name": "employee",
+          "access": {
+            "view": false,
+            "edit": false,
+            "delete": false
+          }
+        }
+      ]
     }
   ]
 }
