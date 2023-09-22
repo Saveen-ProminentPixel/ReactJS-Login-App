@@ -11,7 +11,7 @@ import AllStudent from "../components/AllStudent"
 //   userList: userListType;
 // }
 
-const AllStudentPage = ({setCurrentLinks, currentUser, setUserList, userList}: AllStudentPageProps): JSX.Element => {
+const AllStudentPage = ({ setCurrentLinks, currentUser, setUserList, userList }: AllStudentPageProps): JSX.Element => {
 
 
 

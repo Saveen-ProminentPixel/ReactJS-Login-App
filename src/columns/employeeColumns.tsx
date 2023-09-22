@@ -1,6 +1,6 @@
 
 export const employeeColumns = () => {
-    
+
     const columns = [
 
         {
@@ -33,7 +33,7 @@ export const employeeColumns = () => {
             selector: (row: { company: { department: string; }; }) => row.company.department,
             sortable: true,
         },
-        
+
 
     ];
 

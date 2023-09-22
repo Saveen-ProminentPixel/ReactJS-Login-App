@@ -20,8 +20,8 @@ import ProductRDTPage from "./pages/ProductRDTPage";
 import EmpoyeeRDTPage from "./pages/EmpoyeeRDTPage";
 import axios from "axios";
 import ManageRolePage from "./pages/ManageRolePage";
-import { ManageRolePageType } from "./Types/pagesProps";
-import Modal from 'react-bootstrap/Modal'
+// import { ManageRolePageType } from "./Types/pagesProps";
+// import Modal from 'react-bootstrap/Modal'
 // import ToggleHook from "./hooks/toggleHook";
 
 
@@ -31,25 +31,25 @@ import Modal from 'react-bootstrap/Modal'
 // }
 
 export type userListType = {
-    id: number
-    name: string;
-    password: string;
-    username: string;
-    email: string;
+  id: number
+  name: string;
+  password: string;
+  username: string;
+  email: string;
 };
 
 export type productListType = {
-    id: number;
-    title: string;
-    description: string;
-    price: number;
-    discountPercentage: number;
-    rating: number;
-    stock: number;
-    brand: string;
-    category: string;
-    thumbnail: string;
-    images: string[];
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  discountPercentage: number;
+  rating: number;
+  stock: number;
+  brand: string;
+  category: string;
+  thumbnail: string;
+  images: string[];
 };
 
 export type employeeListType = {
@@ -57,7 +57,7 @@ export type employeeListType = {
   firstName: string;
   lastName: string;
   company: { name: string; title: string; department: string; };
-};  
+};
 
 export type manageRoleListType = {
   id: number;
@@ -69,7 +69,7 @@ export type manageRoleListType = {
 
 
 
-const links: {label: string; path: string;}[] = [{label: "Home", path: "/"},];
+const links: { label: string; path: string; }[] = [{ label: "Home", path: "/" },];
 const user: string = "guest";
 
 // const initialState = {
@@ -103,10 +103,10 @@ function App(): JSX.Element {
   // }, []);
 
   // const [toggle, toggleFunction] = ToggleHook();
-  
 
-  const [currentLinks, setCurrentLinks] = useState(links);
-  const [currentUser, setCurrentUser] = useState(user);
+
+  const [currentLinks, setCurrentLinks] = useState<{ label: string; path: string; }[]>(links);
+  const [currentUser, setCurrentUser] = useState<string>(user);
   // const [userList, setUserList] = useState<userListType[]>(userDb.users);
   const [userList, setUserList] = useState<userListType[]>([]);
   const [userListOfRDT, setUserListOfRDT] = useState<userListType[]>([]);
@@ -116,35 +116,35 @@ function App(): JSX.Element {
 
   useEffect(() => {
 
-    (async() => {
+    (async () => {
       const data = await axios.get("http://localhost:3002/users");
       const response: userListType[] = data.data;
       setUserList(response);
       setUserListOfRDT(response);
-    }) ();
+    })();
 
-    (async() => {
+    (async () => {
       const data = await axios.get("http://localhost:3002/employees");
       const response: employeeListType[] = data.data;
       setEmployeeListOfRDT(response);
-    }) ();
+    })();
 
-    (async() => {
+    (async () => {
       const data = await axios.get("http://localhost:3002/products");
       const response: productListType[] = data.data;
       setProductListOfRDT(response);
-    }) ();
+    })();
 
-    (async() => {
+    (async () => {
       const data = await axios.get("http://localhost:3002/roles");
       const response: manageRoleListType[] = data.data;
       setManageRoleList(response);
-    }) ();
-  },[])
+    })();
+  }, [])
 
 
-  
-  
+
+
   // const [state, dispatch] = useReducer(reducer, initialState);
 
 
@@ -160,7 +160,7 @@ function App(): JSX.Element {
   // dispatch(employeeAction)
 
 
-  
+
 
   return (
     <div>
@@ -169,31 +169,31 @@ function App(): JSX.Element {
         <div className="">
           {/* <Navbar currentUser={currentUser} /> */}
           <Header currentUser={currentUser} />
-        </div>   
+        </div>
         <div className="">
           {/* <Sidebar links={currentlinks} /> */}
           <Sidebar2 links={currentLinks} />
-        </div> 
+        </div>
       </div>
-       
+
       <div className="col-span-5">
-        
-          <Routes>
-            <Route path="/" element={<LoginPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
-            <Route path="user/:name" element={<UserPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
-            <Route path="user/student/:name" element={<StudentPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
-            <Route path="user/studenttable/:name" element={<TablePage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
-            <Route path="user/allstudent/" element={<AllStudentPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} setUserList={setUserList} userList={userList} />} />
-            <Route path="user/reacttable/" element={<UserRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} userList={userListOfRDT} />} />
-            <Route path="product/reacttable/" element={<ProductRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} productList={productListOfRDT} />} />
-            <Route path="employee/reacttable/" element={<EmpoyeeRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} employeeList={employeeListOfRDT} />} />
-            {/* <Route path="employee/reacttable/" element={<EmpoyeeRDTPage reducer={reducer}  />} /> */}
-            <Route path="user/managerole/" element={<ManageRolePage setCurrentLinks={setCurrentLinks} currentUser={currentUser} manageRoleList={manageRoleList} />} />
-          </Routes>
-        
+
+        <Routes>
+          <Route path="/" element={<LoginPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
+          <Route path="user/:name" element={<UserPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
+          <Route path="user/student/:name" element={<StudentPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
+          <Route path="user/studenttable/:name" element={<TablePage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
+          <Route path="user/allstudent/" element={<AllStudentPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} setUserList={setUserList} userList={userList} />} />
+          <Route path="user/reacttable/" element={<UserRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} userList={userListOfRDT} />} />
+          <Route path="product/reacttable/" element={<ProductRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} productList={productListOfRDT} />} />
+          <Route path="employee/reacttable/" element={<EmpoyeeRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} employeeList={employeeListOfRDT} />} />
+          {/* <Route path="employee/reacttable/" element={<EmpoyeeRDTPage reducer={reducer}  />} /> */}
+          <Route path="user/managerole/" element={<ManageRolePage setCurrentLinks={setCurrentLinks} currentUser={currentUser} manageRoleList={manageRoleList} />} />
+        </Routes>
+
       </div>
     </div>
-    
+
   );
 }
 

@@ -4,8 +4,9 @@ import * as Yup from "yup";
 import { manageRoleListType } from "../App";
 import axios from "axios";
 import Modal from 'react-bootstrap/Modal'
+import { RoleAddModalType } from "../Types/componentsTypes";
 
-const RoleAddModal = ({ manageRoleList, onClose, toggleFunction, showAddModal, setShowAddModal }) => {
+const RoleAddModal = ({ manageRoleList, toggleFunction, showAddModal, setShowAddModal }: RoleAddModalType) => {
 
     const validate = Yup.object({
         roleName: Yup.string()
@@ -70,6 +71,14 @@ const RoleAddModal = ({ manageRoleList, onClose, toggleFunction, showAddModal, s
 
                         await (async () => {
                             await axios.post("http://localhost:3002/availablePermissions", availablePermission);
+                        })();
+
+                        const assignedPermission = {
+                            id: newId + 1,
+                            assignedRoles: []
+                        }
+                        await (async () => {
+                            await axios.post("http://localhost:3002/assignedPermissions", assignedPermission);
                         })();
 
                         toggleFunction();

@@ -4,6 +4,8 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Modal, Row, Container, Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
+import { manageRoleListType } from "../App";
+import { RoleEditModalType } from "../Types/componentsTypes";
 // import { Container } from "react-bootstrap/lib/Tab";
 
 export type availablePermissionType = {
@@ -25,18 +27,19 @@ export type assignedPermissionType = {
     assignedRoles: assignedRoleType[];
 }
 
-const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
+const RoleEditModal = ({ editId, showEditModal, setShowEditModal, toggleFunction }: RoleEditModalType) => {
 
-    const allRoles = ["student", "product", "employee"];
+    // const allRoles = ["student", "product", "employee"];
 
     const [availableRoles, setAvailableRoles] = useState<string[]>([]);
     const [assignedRoles, setAssignedRoles] = useState<assignedRoleType[]>([]);
     const [checkedAvailableRoles, setCheckedAvailableRoles] = useState<string[]>([]);
     const [checkedAssignableRoles, setCheckedAssignableRoles] = useState<string[]>([]);
 
-    const handleCheckClickAvailable = (e) => {
-        const isChecked: boolean = e.target.checked;
-        const availableRoleClickedName: string = e.target.name;
+    const handleCheckClickAvailable = (e: React.SyntheticEvent) => {
+        const target = e.target as HTMLInputElement;
+        const isChecked: boolean = target.checked;
+        const availableRoleClickedName: string = target.name;
 
         if (isChecked === true) {
             checkedAvailableRoles.push(availableRoleClickedName);
@@ -51,9 +54,10 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
     }
     // console.log(checkedAvailableRoles);
 
-    const handleCheckClickAssignable = (e) => {
-        const isChecked: boolean = e.target.checked;
-        const assignableRoleClickedName = e.target.name;
+    const handleCheckClickAssignable = (e: React.SyntheticEvent) => {
+        const target = e.target as HTMLInputElement;
+        const isChecked: boolean = target.checked;
+        const assignableRoleClickedName = target.name;
 
         if (isChecked === true) {
             checkedAssignableRoles.push(assignableRoleClickedName);
@@ -70,9 +74,10 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
     }
     // console.log(checkedAssignableRoles + " : checked Assignable Roles");
 
-    const handleCheckClickPermission = (e) => {
-        const isChecked: boolean = e.target.checked;
-        const permissionClickedName: string = e.target.name;
+    const handleCheckClickPermission = (e: React.SyntheticEvent) => {
+        const target = e.target as HTMLInputElement;
+        const isChecked: boolean = target.checked;
+        const permissionClickedName: string = target.name;
 
         const [property, owner] = permissionClickedName.split(" ");
 
@@ -107,10 +112,10 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
     // console.log(availableRoles);
     const renderedAvailableRoles = availableRoles.map(availableRole => {
         return (
-            <div className="border-4 border-gray-400 my-2 px-2" key={availableRole}>
+            <div className="border-4 border-gray-400 bg-white my-2 px-2" key={availableRole}>
                 <Form.Check
                     type={"checkbox"}
-                    id={"default-checkbox"}
+                    id={`default-checkbox-${availableRole}`}
                     label={`${availableRole}`}
                     onClick={handleCheckClickAvailable}
                     name={`${availableRole}`}
@@ -152,7 +157,7 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
 
         return (
             <div className="my-2" key={assignedRole.name}>
-                <div className="border-4 border-green-600 rounded pl-6 bg-green-200">
+                <div className=" py-1 pl-6 bg-green-500 text-white">
                     <Form.Check
                         className=""
                         type="checkbox"
@@ -163,36 +168,38 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
                     <h2 className="font-bold">{assignedRole.name}</h2>
                 </div>
                 {/* <Form className="grid grid-col-3"> */}
-                <Form.Check
-                    className="bg-green-200 pl-16"
-                    type="checkbox"
-                    id={`view-switch-${assignedRole.name}`}
-                    label={`View`}
-                    name={`view ${assignedRole.name}`}
-                    defaultChecked={isView}
-                    onClick={handleCheckClickPermission}
-                // key={`${assignedRole.name}-view`}
-                />
-                <Form.Check
-                    className="bg-green-200 pl-16"
-                    type="checkbox"
-                    id={`edit-switch-${assignedRole.name}`}
-                    label={`Edit`}
-                    name={`edit ${assignedRole.name}`}
-                    defaultChecked={isEdit}
-                    onClick={handleCheckClickPermission}
-                // key={`${assignedRole.name}-edit`}
-                />
-                <Form.Check
-                    className="bg-green-200 pl-16"
-                    type="checkbox"
-                    id={`delete-switch-${assignedRole.name}`}
-                    label={`Delete`}
-                    name={`delete ${assignedRole.name}`}
-                    defaultChecked={isDelete}
-                    onClick={handleCheckClickPermission}
-                // key={`${assignedRole.name}-delete`}
-                />
+                <div className="border-2 border-green-500">
+                    <Form.Check
+                        className="bg-green-200 pl-12"
+                        type="checkbox"
+                        id={`view-switch-${assignedRole.name}`}
+                        label={`View`}
+                        name={`view ${assignedRole.name}`}
+                        defaultChecked={isView}
+                        onClick={handleCheckClickPermission}
+                    // key={`${assignedRole.name}-view`}
+                    />
+                    <Form.Check
+                        className="bg-green-200 pl-12"
+                        type="checkbox"
+                        id={`edit-switch-${assignedRole.name}`}
+                        label={`Edit`}
+                        name={`edit ${assignedRole.name}`}
+                        defaultChecked={isEdit}
+                        onClick={handleCheckClickPermission}
+                    // key={`${assignedRole.name}-edit`}
+                    />
+                    <Form.Check
+                        className="bg-green-200 pl-12"
+                        type="checkbox"
+                        id={`delete-switch-${assignedRole.name}`}
+                        label={`Delete`}
+                        name={`delete ${assignedRole.name}`}
+                        defaultChecked={isDelete}
+                        onClick={handleCheckClickPermission}
+                    // key={`${assignedRole.name}-delete`}
+                    />
+                </div>
                 {/* </Form> */}
 
             </div>
@@ -204,7 +211,7 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
     }
 
 
-    const handleAvailableMoveClick = (e) => {
+    const handleAvailableMoveClick = (e: React.SyntheticEvent) => {
         e.preventDefault();
         // console.log(checkedAvailableRoles);
         let newAvailableRoles: string[] = availableRoles;
@@ -231,7 +238,7 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
     }
 
 
-    const handleAssignableMoveClick = (e) => {
+    const handleAssignableMoveClick = (e: React.SyntheticEvent) => {
         e.preventDefault();
 
         const newAvailableRoles: string[] = [];
@@ -251,11 +258,11 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
     }
 
 
-    const handleUpdateClick = (e) => {
+    const handleUpdateClick = async (e: React.SyntheticEvent) => {
         e.preventDefault();
 
 
-        (async () => {
+        await (async () => {
             const newAvailablePermissions: availablePermissionType = {
                 id: editId,
                 availableRoles: availableRoles
@@ -263,16 +270,31 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
             await axios.put(`http://localhost:3002/availablePermissions/${editId}`, newAvailablePermissions);
         })();
 
-        // *****************************************************************************************************
-        /// ******************************Work from Here***************************************************
-        // ********************************************************************************************************
-        (async () => {
+        await (async () => {
             const newAssignablePermissions: assignedPermissionType = {
                 id: editId,
-                // assignedRoles: {}
+                assignedRoles: assignedRoles
             }
-            await axios.put(`http://localhost:3002/availablePermissions/${editId}`, newAssignablePermissions);
+            await axios.put(`http://localhost:3002/assignedPermissions/${editId}`, newAssignablePermissions);
         })();
+
+        await (async () => {
+            const response = await axios.get(`http://localhost:3002/roles/${editId}`);
+            const data: manageRoleListType = response.data;
+
+            const date = new Date();
+            const updatedDate = date.getDay() + "-" + date.getMonth() + "-" + date.getFullYear() + " " + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+            console.log(data);
+            const updatedRole = { ...data, updatedAt: updatedDate };
+            console.log(updatedRole);
+            await axios.put(`http://localhost:3002/roles/${editId}`, updatedRole);
+            // console.log(availableRoles);
+            console.log(await axios.get(`http://localhost:3002/roles/${editId}`));
+        })();
+
+        toggleFunction();
+
+        onHide();
 
     }
 
@@ -297,34 +319,36 @@ const RoleEditModal = ({ editId, showEditModal, setShowEditModal }) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body className="flex flex-cols-2">
-                <Container className=" border-4 border-black rounded-lg mx-4">
+                <Container className=" border-4 border-black rounded-lg mx-4 bg-slate-200">
                     <Row className="">
                         <Form>
-                            <div className="px-4">
+                            <div className="px-4 w-full mr-24 bg-slate-400 py-2">
                                 <h1 className="font-bold text-xl">Available Permission</h1>
                             </div>
-                            <div className="border-4 border-blue-500 px-6 py-2 my-4 ml-4 rounded-xl">
+                            <div className=" mr-24 px-6 py-2 my-4 ml-20">
                                 {renderedAvailableRoles}
                             </div>
-                            <div className="border-4 border-blue-500 px-6 py-2 my-4 ml-4 rounded-xl">
-                                <Button type="submit" onClick={handleAvailableMoveClick} className="bg-gray-400 mt-6">Move</Button>
+                            {/* <div className="border-4 border-blue-500 px-6 py-2 my-4 ml-4 rounded-xl"> */}
+                            <div className="px-6 py-2 my-4 ml-16 mr-20 text-center">
+                                <Button type="submit" onClick={handleAvailableMoveClick} className="bg-blue-500 mt-6">Move</Button>
                             </div>
                         </Form>
                     </Row>
                 </Container>
-                <Container className=" border-4 border-black rounded-lg mx-4">
+                <Container className=" border-4 border-black rounded-lg mx-4 bg-zinc-200">
                     <Row>
                         <Form>
-                            <div className="px-4">
+                            <div className=" bg-zinc-400 w-full px-4 mr-24 py-2">
                                 <h1 className="font-bold text-xl">Assigned Permission</h1>
                             </div>
-                            <div className="border-4 border-blue-500 px-6 py-2 my-4 ml-4 rounded-xl">
+                            <div className=" px-6 py-2 my-4 mr-20 ml-16">
 
                                 {renderedAssignedRoles}
 
                             </div>
-                            <div className="border-4 border-blue-500 px-6 py-2 my-4 ml-4 rounded-xl">
-                                <Button type="submit" onClick={handleAssignableMoveClick} className="bg-gray-400 mt-6">Move</Button>
+                            {/* <div className="border-4 border-blue-500 px-6 py-2 my-4 ml-4 rounded-xl"> */}
+                            <div className="px-6 py-2 my-4 ml-16 mr-20 text-center">
+                                <Button type="submit" onClick={handleAssignableMoveClick} className="bg-blue-500 mt-6">Move</Button>
                             </div>
                         </Form>
                     </Row>

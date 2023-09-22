@@ -2544,7 +2544,7 @@
       "id": 1,
       "roleName": "Admin",
       "createdAt": "05-09-2023 06:38:31",
-      "updatedAt": "09-12-2023 04:52:21",
+      "updatedAt": "5-8-2023 11:28:58",
       "description": "Admin"
     },
     {
@@ -2552,21 +2552,141 @@
       "roleName": "Human Resource",
       "description": "Human Resource",
       "createdAt": "4-8-2023 16:52:42",
-      "updatedAt": "4-8-2023 16:52:42"
+      "updatedAt": "5-8-2023 12:9:59"
+    },
+    {
+      "id": 3,
+      "roleName": "Junior Developer",
+      "description": "Junior Developer",
+      "createdAt": "5-8-2023 10:46:41",
+      "updatedAt": "5-8-2023 11:8:6"
+    },
+    {
+      "id": 4,
+      "roleName": "Team Leader",
+      "description": "Team Leader",
+      "createdAt": "5-8-2023 10:46:47",
+      "updatedAt": "5-8-2023 10:59:7"
+    },
+    {
+      "id": 5,
+      "roleName": "Front Desk Operator",
+      "description": "Front Desk Operator",
+      "createdAt": "5-8-2023 10:46:52",
+      "updatedAt": "5-8-2023 10:59:35"
+    },
+    {
+      "id": 6,
+      "roleName": "Production Manager",
+      "description": "Production Manager",
+      "createdAt": "5-8-2023 10:46:59",
+      "updatedAt": "5-8-2023 12:31:4"
+    },
+    {
+      "id": 7,
+      "roleName": "Web Developer",
+      "description": "Web Developer",
+      "createdAt": "5-8-2023 10:47:4",
+      "updatedAt": "5-8-2023 11:26:21"
+    },
+    {
+      "id": 8,
+      "roleName": "Travel Agent",
+      "description": "Travel Agent",
+      "createdAt": "5-8-2023 11:18:31",
+      "updatedAt": "5-8-2023 11:29:15"
+    },
+    {
+      "id": 9,
+      "roleName": "Operation Manager",
+      "description": "Operation manager",
+      "createdAt": "5-8-2023 11:19:14",
+      "updatedAt": "5-8-2023 11:28:46"
+    },
+    {
+      "id": 10,
+      "roleName": "HR Assistant",
+      "description": "HR Assistant",
+      "createdAt": "5-8-2023 12:36:6",
+      "updatedAt": "5-8-2023 12:38:19"
+    },
+    {
+      "id": 11,
+      "roleName": "Backend Developer",
+      "description": "Backend Developer",
+      "createdAt": "5-8-2023 12:36:17",
+      "updatedAt": "5-8-2023 12:36:17"
     }
   ],
   "availablePermissions": [
     {
       "id": 1,
+      "availableRoles": []
+    },
+    {
+      "id": 2,
+      "availableRoles": [
+        "student"
+      ]
+    },
+    {
+      "id": 3,
+      "availableRoles": [
+        "student",
+        "employee"
+      ]
+    },
+    {
+      "id": 4,
+      "availableRoles": [
+        "student"
+      ]
+    },
+    {
+      "id": 5,
+      "availableRoles": [
+        "employee"
+      ]
+    },
+    {
+      "id": 6,
+      "availableRoles": [
+        "student",
+        "employee"
+      ]
+    },
+    {
+      "id": 7,
+      "availableRoles": [
+        "student"
+      ]
+    },
+    {
+      "id": 8,
+      "availableRoles": [
+        "product"
+      ]
+    },
+    {
+      "id": 9,
+      "availableRoles": [
+        "student",
+        "employee"
+      ]
+    },
+    {
+      "id": 10,
       "availableRoles": [
         "student",
         "product"
       ]
     },
     {
-      "id": 2,
+      "id": 11,
       "availableRoles": [
-        "student"
+        "student",
+        "product",
+        "employee"
       ]
     }
   ],
@@ -2577,9 +2697,25 @@
         {
           "name": "employee",
           "access": {
-            "view": false,
-            "edit": false,
-            "delete": false
+            "view": true,
+            "edit": true,
+            "delete": true
+          }
+        },
+        {
+          "name": "student",
+          "access": {
+            "view": true,
+            "edit": true,
+            "delete": true
+          }
+        },
+        {
+          "name": "product",
+          "access": {
+            "view": true,
+            "edit": true,
+            "delete": true
           }
         }
       ]
@@ -2588,22 +2724,162 @@
       "id": 2,
       "assignedRoles": [
         {
+          "name": "employee",
+          "access": {
+            "view": false,
+            "edit": true,
+            "delete": true
+          }
+        },
+        {
           "name": "product",
           "access": {
-            "view": true,
-            "edit": false,
+            "view": false,
+            "edit": true,
+            "delete": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "assignedRoles": [
+        {
+          "name": "product",
+          "access": {
+            "view": false,
+            "edit": true,
             "delete": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "assignedRoles": [
+        {
+          "name": "product",
+          "access": {
+            "view": false,
+            "edit": false,
+            "delete": true
           }
         },
         {
           "name": "employee",
           "access": {
             "view": false,
-            "edit": false,
+            "edit": true,
             "delete": false
           }
         }
       ]
+    },
+    {
+      "id": 5,
+      "assignedRoles": [
+        {
+          "name": "student",
+          "access": {
+            "view": false,
+            "edit": false,
+            "delete": false
+          }
+        },
+        {
+          "name": "product",
+          "access": {
+            "view": true,
+            "edit": true,
+            "delete": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "assignedRoles": [
+        {
+          "name": "product",
+          "access": {
+            "view": true,
+            "edit": true,
+            "delete": true
+          }
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "assignedRoles": [
+        {
+          "name": "product",
+          "access": {
+            "view": false,
+            "edit": true,
+            "delete": true
+          }
+        },
+        {
+          "name": "employee",
+          "access": {
+            "view": false,
+            "edit": true,
+            "delete": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "assignedRoles": [
+        {
+          "name": "employee",
+          "access": {
+            "view": false,
+            "edit": true,
+            "delete": false
+          }
+        },
+        {
+          "name": "student",
+          "access": {
+            "view": true,
+            "edit": true,
+            "delete": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "assignedRoles": [
+        {
+          "name": "product",
+          "access": {
+            "view": false,
+            "edit": true,
+            "delete": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "assignedRoles": [
+        {
+          "name": "employee",
+          "access": {
+            "view": true,
+            "edit": true,
+            "delete": false
+          }
+        }
+      ]
+    },
+    {
+      "id": 11,
+      "assignedRoles": []
     }
   ]
 }

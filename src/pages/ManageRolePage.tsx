@@ -14,7 +14,7 @@ const ManageRolePage = ({ setCurrentLinks, currentUser, manageRoleList }: Manage
     const { toggle, toggleFunction } = ToggleHook();
 
     const [showAddModal, setShowAddModal] = useState<boolean>(false);
-    const [showModal, setShowModal] = useState<boolean>(false);
+    // const [showModal, setShowModal] = useState<boolean>(false);
     const [showEditModal, setShowEditModal] = useState<boolean>(false);
     const [editId, setEditId] = useState<number>(0);
 
@@ -22,9 +22,9 @@ const ManageRolePage = ({ setCurrentLinks, currentUser, manageRoleList }: Manage
         setShowAddModal(true);
     }
 
-    const handleAddClose = (): void => {
-        setShowAddModal(false);
-    }
+    // const handleAddClose = (): void => {
+    //     setShowAddModal(false);
+    // }
 
 
     const handleEditClick = (id: number) => {
@@ -33,9 +33,9 @@ const ManageRolePage = ({ setCurrentLinks, currentUser, manageRoleList }: Manage
         setShowEditModal(true);
     };
 
-    const handleEditClose = (): void => {
-        setShowEditModal(false);
-    }
+    // const handleEditClose = (): void => {
+    //     setShowEditModal(false);
+    // }
 
     const handleDeleteClick = (id: number) => {
 
@@ -51,12 +51,16 @@ const ManageRolePage = ({ setCurrentLinks, currentUser, manageRoleList }: Manage
             await axios.delete(`http://localhost:3002/availablePermissions/${id}`);
         })();
 
+        (async () => {
+            await axios.delete(`http://localhost:3002/assignedPermissions/${id}`);
+        })();
+
         toggleFunction();
     };
 
 
-    const roleAddModal = <RoleAddModal manageRoleList={manageRoleList} onClose={handleAddClose} toggleFunction={toggleFunction} showAddModal={showAddModal} setShowAddModal={setShowAddModal} ></RoleAddModal>;
-    const roleEditModal = <RoleEditModal editId={editId} showEditModal={showEditModal} setShowEditModal={setShowEditModal}></RoleEditModal>;
+    const roleAddModal = <RoleAddModal manageRoleList={manageRoleList} toggleFunction={toggleFunction} showAddModal={showAddModal} setShowAddModal={setShowAddModal} ></RoleAddModal>;
+    const roleEditModal = <RoleEditModal editId={editId} showEditModal={showEditModal} setShowEditModal={setShowEditModal} toggleFunction={toggleFunction}></RoleEditModal>;
 
 
     const columns = manageRoleColumns(handleEditClick, handleDeleteClick);

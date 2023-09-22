@@ -15,7 +15,7 @@ export interface AddModalType {
 }
 
 export interface AllStudentType {
-    setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
+    setCurrentLinks: React.Dispatch<React.SetStateAction<{ label: string; path: string; }[]>>;
     currentUser: string;
     setUserList: React.Dispatch<React.SetStateAction<userListType[]>>;
     userList: userListType[];
@@ -34,7 +34,7 @@ export interface HeaderType {
 }
 
 export interface LoginType {
-    setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
+    setCurrentLinks: React.Dispatch<React.SetStateAction<{ label: string; path: string; }[]>>;
 }
 
 export interface ModalType {
@@ -50,11 +50,11 @@ export interface NavbarType {
 }
 
 export interface ReactTableType {
-    setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
+    setCurrentLinks: React.Dispatch<React.SetStateAction<{ label: string; path: string; }[]>>;
     currentUser: string;
     list: productListType[] | userListType[] | employeeListType[] | manageRoleListType[];
     actionModal?: JSX.Element;
-    columns: unknown[];   
+    columns: unknown[];
     // expandedComponent?: ({data}: {data: productListType | userListType | employeeListType} ) => JSX.Element;
     expandedComponent?: React.FC<ExpandedComponentProps>;
     isSelectable: boolean;
@@ -65,20 +65,34 @@ export interface ReactTableType {
 }
 
 export interface SideBar2Type {
-    links: {label: string; path: string;}[];
+    links: { label: string; path: string; }[];
 }
 
 export interface StudentType {
-    setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
+    setCurrentLinks: React.Dispatch<React.SetStateAction<{ label: string; path: string; }[]>>;
     name: string;
 }
 
 export interface StudentTableType {
-    setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
+    setCurrentLinks: React.Dispatch<React.SetStateAction<{ label: string; path: string; }[]>>;
     name: string;
 }
 
 export interface UserType {
-    setCurrentLinks: React.Dispatch<React.SetStateAction<{label: string;path: string;}[]>>;
+    setCurrentLinks: React.Dispatch<React.SetStateAction<{ label: string; path: string; }[]>>;
     name: string;
+}
+
+export interface RoleAddModalType {
+    manageRoleList: manageRoleListType[];
+    toggleFunction: () => void;
+    showAddModal: boolean;
+    setShowAddModal: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export interface RoleEditModalType {
+    editId: number;
+    showEditModal: boolean;
+    setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
+    toggleFunction: () => void;
 }

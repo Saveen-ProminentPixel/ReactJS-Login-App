@@ -8,13 +8,13 @@ import { StudentPageType } from "../Types/pagesProps";
 
 
 
-const StudentPage = ({setCurrentLinks, setCurrentUser}: StudentPageType): JSX.Element => {
+const StudentPage = ({ setCurrentLinks, setCurrentUser }: StudentPageType): JSX.Element => {
 
-    const { name }: Readonly<Params<string>> = useParams();
-    
-    useEffect(() => {
-        setCurrentUser(name!);
-    }, []);
+  const { name }: Readonly<Params<string>> = useParams();
+
+  useEffect(() => {
+    setCurrentUser(name!);
+  }, []);
 
   return (
     <Student setCurrentLinks={setCurrentLinks} name={name!} />
