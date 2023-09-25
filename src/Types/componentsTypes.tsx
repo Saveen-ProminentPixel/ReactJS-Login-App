@@ -1,6 +1,6 @@
 // import { TableColumn } from "react-data-table-component";
 // import { TableColumn } from "react-data-table-component";
-import { employeeListType, manageRoleListType, productListType, userListType } from "../App";
+import { accessType, banyanUserListType, employeeListType, manageRoleListType, productListType, userListType } from "../App";
 // import { ExpandableRowsComponent } from "react-data-table-component/dist/src/DataTable/types";
 // import { Dispatch, SetStateAction } from "react";
 import { ExpandedComponentProps } from "../pages/ProductRDTPage";
@@ -60,8 +60,8 @@ export interface ReactTableType {
     isSelectable: boolean;
     isExpandable: boolean;
     dataApi: string;
-    toggle?: boolean,
-    toggleFunction?: () => void
+    toggle?: boolean;
+    toggleFunction?: () => void;
 }
 
 export interface SideBar2Type {
@@ -95,4 +95,18 @@ export interface RoleEditModalType {
     showEditModal: boolean;
     setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
     toggleFunction: () => void;
+}
+
+export interface BanyanUserLoginType {
+    banyanUserList: banyanUserListType[];
+}
+
+export interface BanyanUserType {
+    username: string | undefined;
+    setCurrentUser: React.Dispatch<React.SetStateAction<string>>;
+    banyanUserList: banyanUserListType[];
+    setCurrentLinks: React.Dispatch<React.SetStateAction<{ label: string; path: string; }[]>>;
+    setStudentAccess: React.Dispatch<React.SetStateAction<accessType>>;
+    setProductAccess: React.Dispatch<React.SetStateAction<accessType>>;
+    setEmployeeAccess: React.Dispatch<React.SetStateAction<accessType>>;
 }

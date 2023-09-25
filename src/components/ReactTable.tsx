@@ -30,10 +30,17 @@ const ReactTable = ({ setCurrentLinks, currentUser, list, actionModal, columns, 
 
   // const dummyExpandedcomponent = ExpandedComponent;
 
-  const links = [
+  let links = [
     { label: "Home", path: "/" },
-    { label: "Back", path: `/user/${currentUser}` },
+    { label: "Back", path: `/banyanUser/${currentUser}` },
   ];
+
+  if (currentUser === "admin") {
+    links = [
+      { label: "Home", path: "/" },
+      { label: "Back", path: `/user/${currentUser}` },
+    ];
+  }
 
 
   // const employeeAction = {
@@ -176,7 +183,6 @@ const ReactTable = ({ setCurrentLinks, currentUser, list, actionModal, columns, 
   useEffect(() => {
     setTotalRows(list.length);
   }, [])
-
 
   const fetchUsers = async (page: number) => {
     setLoading(true);

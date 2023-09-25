@@ -10,7 +10,7 @@ import { userColumns } from "../columns/userColumns";
 // import { userListType } from "../App";
 // import ToggleHook from "../hooks/toggleHook";
 
-const UserRDTPage = ({ setCurrentLinks, currentUser, userList }: UserRDTPageType): JSX.Element => {
+const UserRDTPage = ({ setCurrentLinks, currentUser, userList, studentAccess }: UserRDTPageType): JSX.Element => {
 
   const { toggle, toggleFunction } = ToggleHook();
 
@@ -105,7 +105,7 @@ const UserRDTPage = ({ setCurrentLinks, currentUser, userList }: UserRDTPageType
 
   const modal = <Modal onClose={handleClose} actionBar={actionBar} name={editUser} userList={userList} toggleFunction={toggleFunction} ></Modal>
   // const addModal = <AddModal onClose={handleAddClose} actionBar={actionAddBar} setUserList={setUserList} userList={userList} ></AddModal>
-  const columns = userColumns(handleEditClick, handleDeleteClick);
+  const columns = userColumns(handleEditClick, handleDeleteClick, studentAccess);
 
   // const columns = 
   //   // useMemo(() =>  

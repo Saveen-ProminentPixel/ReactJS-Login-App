@@ -17,4 +17,4 @@ const UserPage = ({ setCurrentLinks, setCurrentUser }: UserPageType): JSX.Elemen
   )
 }
 
-export default UserPage
+export default UserPage;

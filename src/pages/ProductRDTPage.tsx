@@ -15,12 +15,12 @@ export interface ExpandedComponentProps {
 }
 
 
-const ProductRDTPage = ({ setCurrentLinks, currentUser, productList }: ProductRDTPageType): JSX.Element => {
+const ProductRDTPage = ({ setCurrentLinks, currentUser, productList, productAccess }: ProductRDTPageType): JSX.Element => {
 
   const expandedComponent: React.FC<ExpandedComponentProps> = ({ data }) => <pre>{data.description}</pre>;
   // const ExpandedComponent = () => "";
 
-  const columns = productColumns();
+  const columns = productColumns(productAccess);
 
   // const columns = [
 

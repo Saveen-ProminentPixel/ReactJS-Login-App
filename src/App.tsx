@@ -20,6 +20,9 @@ import ProductRDTPage from "./pages/ProductRDTPage";
 import EmpoyeeRDTPage from "./pages/EmpoyeeRDTPage";
 import axios from "axios";
 import ManageRolePage from "./pages/ManageRolePage";
+// import BanyanUserPage from "./pages/BanyanUserLoginPage";
+import BanyanUserLoginPage from "./pages/BanyanUserLoginPage";
+import BanyanUserPage from "./pages/BanyanUserPage";
 // import { ManageRolePageType } from "./Types/pagesProps";
 // import Modal from 'react-bootstrap/Modal'
 // import ToggleHook from "./hooks/toggleHook";
@@ -67,11 +70,25 @@ export type manageRoleListType = {
   description: string;
 };
 
+export type banyanUserListType = {
+  id: number;
+  username: string;
+  password: string;
+  name: string;
+  roleIds: number[];
+}
+
+export type accessType = {
+  view: boolean;
+  edit: boolean;
+  delete: boolean;
+}
+
 
 
 const links: { label: string; path: string; }[] = [{ label: "Home", path: "/" },];
 const user: string = "guest";
-
+const banyanUserList = userDb.banyanUsers;
 // const initialState = {
 //   currentLinks: links,
 //   currentUser: user,
@@ -113,6 +130,9 @@ function App(): JSX.Element {
   const [productListOfRDT, setProductListOfRDT] = useState<productListType[]>(userDb.products);
   const [employeeListOfRDT, setEmployeeListOfRDT] = useState<employeeListType[]>(userDb.employees);
   const [manageRoleList, setManageRoleList] = useState<manageRoleListType[]>(userDb.roles);
+  const [studentAccess, setStudentAccess] = useState<accessType>({ view: true, edit: true, delete: true });
+  const [productAccess, setProductAccess] = useState<accessType>({ view: true, edit: true, delete: true });
+  const [employeeAccess, setEmployeeAccess] = useState<accessType>({ view: true, edit: true, delete: true });
 
   useEffect(() => {
 
@@ -180,13 +200,15 @@ function App(): JSX.Element {
 
         <Routes>
           <Route path="/" element={<LoginPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
+          <Route path="/banyanUser" element={<BanyanUserLoginPage setCurrentLinks={setCurrentLinks} banyanUserList={banyanUserList} />} />
+          <Route path="/banyanUser/:username" element={<BanyanUserPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} banyanUserList={banyanUserList} setStudentAccess={setStudentAccess} setEmployeeAccess={setEmployeeAccess} setProductAccess={setProductAccess} />} />
           <Route path="user/:name" element={<UserPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
           <Route path="user/student/:name" element={<StudentPage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
           <Route path="user/studenttable/:name" element={<TablePage setCurrentLinks={setCurrentLinks} setCurrentUser={setCurrentUser} />} />
           <Route path="user/allstudent/" element={<AllStudentPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} setUserList={setUserList} userList={userList} />} />
-          <Route path="user/reacttable/" element={<UserRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} userList={userListOfRDT} />} />
-          <Route path="product/reacttable/" element={<ProductRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} productList={productListOfRDT} />} />
-          <Route path="employee/reacttable/" element={<EmpoyeeRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} employeeList={employeeListOfRDT} />} />
+          <Route path="student/reacttable/" element={<UserRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} userList={userListOfRDT} studentAccess={studentAccess} />} />
+          <Route path="product/reacttable/" element={<ProductRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} productList={productListOfRDT} productAccess={productAccess} />} />
+          <Route path="employee/reacttable/" element={<EmpoyeeRDTPage setCurrentLinks={setCurrentLinks} currentUser={currentUser} employeeList={employeeListOfRDT} employeeAccess={employeeAccess} />} />
           {/* <Route path="employee/reacttable/" element={<EmpoyeeRDTPage reducer={reducer}  />} /> */}
           <Route path="user/managerole/" element={<ManageRolePage setCurrentLinks={setCurrentLinks} currentUser={currentUser} manageRoleList={manageRoleList} />} />
         </Routes>

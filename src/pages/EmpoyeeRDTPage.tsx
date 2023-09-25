@@ -5,7 +5,7 @@ import { employeeColumns } from "../columns/employeeColumns";
 import ReactTable from "../components/ReactTable";
 // import { reducer } from '../App.tsx'
 
-const EmpoyeeRDTPage = ({ setCurrentLinks, currentUser, employeeList }: EmployeeRDTPageType): JSX.Element => {
+const EmpoyeeRDTPage = ({ setCurrentLinks, currentUser, employeeList, employeeAccess }: EmployeeRDTPageType): JSX.Element => {
   // const EmpoyeeRDTPage = ({reducer}) => {
 
   // const employeeAction = {
@@ -15,7 +15,7 @@ const EmpoyeeRDTPage = ({ setCurrentLinks, currentUser, employeeList }: Employee
   // }
   //   }
 
-  const columns = employeeColumns();
+  const columns = employeeColumns(employeeAccess);
   // console.log(columns);
 
   // const newSetCurrentLinks = setCurrentLinks;

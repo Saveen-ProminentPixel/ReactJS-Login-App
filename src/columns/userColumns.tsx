@@ -1,5 +1,9 @@
+import { accessType } from "../App";
 
-export const userColumns = (handleEditClick: (name: string) => void, handleDeleteClick: (name: string) => void) => {
+export const userColumns = (handleEditClick: (name: string) => void, handleDeleteClick: (name: string) => void, studentAccess: accessType) => {
+
+    const editAllowed = studentAccess.edit;
+    const deleteAllowed = studentAccess.delete;
 
     const columns =
         // useMemo(() =>  
@@ -10,8 +14,8 @@ export const userColumns = (handleEditClick: (name: string) => void, handleDelet
                         Dropdown button
                     </button>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <button onClick={() => handleEditClick(row.name)} className='dropdown-item rounded bg-yellow-400 my-2 mx-3 w-32 pl-4'>Edit</button>
-                        <button onClick={() => handleDeleteClick(row.name)} className='dropdown-item rounded bg-red-400 my-2 mx-3 w-32 pl-4'>Delete</button>
+                        {editAllowed && <button onClick={() => handleEditClick(row.name)} className='dropdown-item rounded bg-yellow-400 my-2 mx-3 w-32 pl-4'>Edit</button>}
+                        {deleteAllowed && <button onClick={() => handleDeleteClick(row.name)} className='dropdown-item rounded bg-red-400 my-2 mx-3 w-32 pl-4'>Delete</button>}
                         {/* <button onClick={() => handleClick(user)} className='dropdown-item rounded bg-green-400 my-2 mx-3 w-32 pl-4'>Add</button> */}
                     </div>
                 </div>,

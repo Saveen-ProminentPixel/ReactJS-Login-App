@@ -2615,7 +2615,7 @@
       "roleName": "Backend Developer",
       "description": "Backend Developer",
       "createdAt": "5-8-2023 12:36:17",
-      "updatedAt": "5-8-2023 12:36:17"
+      "updatedAt": "1-8-2023 11:32:5"
     }
   ],
   "availablePermissions": [
@@ -2912,7 +2912,12 @@
       "name": "Saveen Poonia",
       "roleIds": [
         1,
-        2
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
       ]
     },
     {
@@ -2933,6 +2938,7 @@
       "name": "Yash Rajput",
       "roleIds": [
         5,
+        2,
         7
       ]
     },

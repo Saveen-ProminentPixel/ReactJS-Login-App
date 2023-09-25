@@ -15,6 +15,7 @@ function Login({ setCurrentLinks }: LoginType): JSX.Element {
 
     const links = [
         { label: "Home", path: "/" },
+        { label: "User Login", path: "/banyanUser" },
     ];
 
     useEffect(() => {
@@ -56,7 +57,7 @@ function Login({ setCurrentLinks }: LoginType): JSX.Element {
             {({ errors, touched }) => (
                 <Form className="ml-16 pt-14 pl-3">
                     <div className="grid grid-cols-1 text-center bg-stone-200 mx-10 pb-52">
-                        <h1 className="bg-blue-300 m-2 mx-10 mt-24 p-3 rounded-full border-4 border-blue-500 font-bold text-2xl text-blue-800">Login</h1>
+                        <h1 className="bg-blue-300 m-2 mx-10 mt-24 p-3 rounded-full border-4 border-blue-500 font-bold text-2xl text-blue-800">Admin Login</h1>
                         <div className="bg-cyan-200 mx-96 pb-24 pt-10 rounded-xl border-4 border-cyan-500">
                             <div className=" m-2">
                                 <label className="bg-stone-500 rounded pr-32 px-2 text-white">Name:</label>

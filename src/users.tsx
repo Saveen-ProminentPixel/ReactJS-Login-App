@@ -1,7 +1,7 @@
-const users: {name: string; password: string; username: string; email: string}[] = [
+const users: { name: string; password: string; username: string; email: string }[] = [
     {
-        name: "saveen",
-        password: "saveen123",
+        name: "admin",
+        password: "admin123",
         username: "sam",
         email: "saveen@gmail.com"
 

@@ -10,7 +10,7 @@ const User = ({ setCurrentLinks, name }: UserType): JSX.Element => {
         { label: "Student", path: `/user/student/${name}` },
         { label: "Student Table", path: `/user/studenttable/${name}` },
         { label: "All Students", path: `/user/allstudent/` },
-        { label: "User RDT", path: `/user/reacttable/` },
+        { label: "Student RDT", path: `/student/reacttable/` },
         { label: "Product RDT", path: `/product/reacttable/` },
         { label: "Employee RDT", path: `/employee/reacttable/` },
         { label: "Manage Roles", path: `/user/managerole/` },
