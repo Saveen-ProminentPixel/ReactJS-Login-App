@@ -1,6 +1,7 @@
 // import React from 'react'
 // import Container from 'react-bootstrap/Container';
 // import Navbar from 'react-bootstrap/Navbar';
+import { Nav } from 'react-bootstrap';
 import { HeaderType } from '../Types/componentsTypes';
 import '../css/Dashboard.css';
 // import 'bootstrap/dist/css/bootstrap.min.css';
@@ -19,10 +20,10 @@ const Header = ({ currentUser }: HeaderType): JSX.Element => {
     //     </Navbar.Collapse>
     //   </Container>
     // </Navbar>
-    <nav className="navbar navbar-light bg-slate-500 justify-content-between w-full fixed">
+    <Nav className="navbar navbar-light bg-slate-500 justify-content-between w-full fixed">
       <a className="navbar-brand pl-48 font-bold text-white">Welcome!!!!</a>
       <a className='navbar-brand font-bold text-white' href="#login">User: {currentUser}</a>
-    </nav>
+    </Nav>
   );
 }
 

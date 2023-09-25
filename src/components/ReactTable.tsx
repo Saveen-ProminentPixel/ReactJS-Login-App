@@ -256,6 +256,11 @@ const ReactTable = ({ setCurrentLinks, currentUser, list, actionModal, columns, 
   const deleteModal = <DeleteModal selectedRows={selectedRows} list={list} dataApi={dataApi} setShowDeleteModal={setShowDeleteModal} toggleFunction={toggleFunction} />;
   // const deleteModal = <DeleteModal selectedRows={selectedRows} {...state} {...dispatch} />;
 
+  let rowDisabledCriteria;
+  if (dataApi === "employees") {
+    rowDisabledCriteria = (row: any) => row.company.department === "Services";
+  }
+
 
 
   return (
@@ -267,6 +272,7 @@ const ReactTable = ({ setCurrentLinks, currentUser, list, actionModal, columns, 
         selectableRows={isSelectable}
         // contextActions={contextActions}
         onSelectedRowsChange={handleRowSelected}
+        selectableRowDisabled={rowDisabledCriteria}
         // clearSelectedRows={toggleCleared}
         expandableRows={isExpandable}
         expandableRowsComponent={expandedComponent as ExpandableRowsComponent<unknown> | undefined}

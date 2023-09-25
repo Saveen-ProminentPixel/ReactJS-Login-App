@@ -52,6 +52,7 @@ export const employeeColumns = (employeeAccess: accessType) => {
             name: "Department",
             selector: (row: { company: { department: string; }; }) => row.company.department,
             sortable: true,
+            // cell: row => <div>{row.company.department === "Services" ? 'Yes' : 'No'}</div>,
         },
 
 
