@@ -260,13 +260,16 @@ const ReactTable = ({ setCurrentLinks, currentUser, list, actionModal, columns, 
   if (dataApi === "employees") {
     rowDisabledCriteria = (row: any) => row.company.department === "Services";
   }
+  if (dataApi === "users") {
+    rowDisabledCriteria = (row: any) => row.username.length <= 7;
+  }
 
 
 
   return (
     <Fragment>
       {showDeleteModal && deleteModal}
-      <DataTable className="ml-40 pt-20"
+      <DataTable className="ml-44 pt-20"
         columns={columns as TableColumn<unknown>[]}
         data={data}
         selectableRows={isSelectable}

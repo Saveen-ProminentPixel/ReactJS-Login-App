@@ -177,7 +177,7 @@ const BanyanUser = ({ username, setCurrentUser, banyanUserList, setCurrentLinks,
 
     return (
         <div className="bg-stone-100 ml-16 pb-52 pt-28 pl-3">
-            <div className="bg-stone-100 ml-16 pb-52 pt-14 pl-3 text-center">
+            <div className="bg-stone-100 ml-20 pb-52 pt-14 pl-3 text-center">
                 <div className="border-4 border-stone-500 bg-stone-300 font-extrabold text-3xl text-center text-gray-600 py-4">
                     <h1>
                         Hello!!!! {user!.name}

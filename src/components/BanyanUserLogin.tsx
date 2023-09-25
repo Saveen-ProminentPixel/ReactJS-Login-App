@@ -20,7 +20,7 @@ const BanyanUserLogin = ({ banyanUserList }: BanyanUserLoginType) => {
     });
 
     return (
-        <div className="bg-stone-100 ml-16 pb-52 pt-28 pl-3">
+        <div className="bg-stone-100 ml-20 pb-52 pt-28 pl-3">
             <Formik
                 initialValues={{
                     username: "",
